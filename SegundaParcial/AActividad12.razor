@@ -1,0 +1,61 @@
+﻿@page "/AAct12"
+
+<h1>ADMINISTRADOR DE ACTIVIDADES</h1>
+
+<div class="alert alert-primary" role="alert">
+    Actividad <input type="text" class="form-control" @bind-value="nombre">
+</div>
+
+<button class="btn btn-outline-primary" @onclick="agregar"> Agregar actividad </button>
+<button class="btn btn-outline-primary" @onclick="eliminar"> Eliminar </button>
+<button class="btn btn-outline-primary" @onclick="mostrar"> Mostrar actividades </button>
+<br />
+<br />
+
+<h5>Ingresados @Actividades.Count</h5>
+
+@if (contador > 0)
+{
+    <table class="table table-striped">
+
+        <thead>
+            <tr><th>A C T I V I D A D E S</th></tr>
+        </thead>
+
+        <tbody>
+            @for (int i = 0; i < Actividades.Count; i++)
+            {
+                <tr><td>@Actividades[i]</td></tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+
+@code {
+
+    private string nombre = "";
+    private int contador = 0;
+    //private List<string> Nombres = new List<string>();
+    private List<string> Actividades = new();
+
+    private void agregar()
+    {
+        //if (!Actividades.Contains(nombre)) //no agregar uno ya puesto
+        //{
+        Actividades.Add(nombre);
+        //}
+    }
+
+    private void eliminar()
+    {
+        Actividades.Remove(nombre);
+        //Actividades.RemoveAt(0); //eliminar las actividades en esa posicion
+    }
+
+    private void mostrar()
+    {
+        contador ++;
+    }
+}

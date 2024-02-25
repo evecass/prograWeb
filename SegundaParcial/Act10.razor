@@ -1,0 +1,51 @@
+﻿@page "/Diasdelmes"
+
+<h1>CONOCER LOS DÍAS DE UN MES</h1>
+<br>
+MES
+<input id="month" type="number" class="form-control border border-dark" @bind-value="mes" />
+<br>
+AÑO
+<input id="year" type="number" class="form-control border border-dark" @bind-value="año" />
+<br>
+<button type="button" class="btn btn-primary" @onclick="conversion">Mostrar resultado</button>
+<br>
+<br>
+@if (ResultadoDias)
+{
+    <div class="alert alert-success" role="alert">
+        <p>Los días que tiene el mes @mes, del año @año, son: @rmes </p>
+    </div>
+}
+
+@code {
+    private int mes { get; set; }
+    private int año { get; set; }
+    private string? rmes;
+    bool ResultadoDias = false;
+
+    private void conversion()
+    {
+        ResultadoDias = true;
+
+        @if ((año % 4 == 0 && año % 100 != 0) || año % 400 == 0)
+        {
+            @if (mes == 2)
+            {
+                rmes = "29 dias";
+            }
+        }
+        else if (mes == 2) { rmes = "28 dias"; }
+
+
+        @if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)
+        {
+            rmes = "31 dias";
+        }
+        else if (mes == 4 || mes == 6 || mes == 9 || mes == 11)
+        {
+            rmes = "30 dias";
+        }
+
+    }
+}

@@ -1,0 +1,51 @@
+﻿@page "/CambioMoneda"
+
+<h1>CAMBIO DE MONEDA</h1>
+
+<br />
+<br />
+
+<div class="input-group mb-1">
+    PESOS<span class="input-group-text">$</span>
+    <input type="number" class="form-control" @bind-value="pesos">
+</div>
+
+<br />
+
+<div class="button1">
+    <button type="button" class="btn btn-primary" @onclick="conversor">Calcular cambio</button>
+</div>
+
+<br />
+
+<div class="form-floating mb-3">
+    <input class="form-control" id="floatingInputDisabled" disabled @bind="rdolar">
+    <label for="floatingInputDisabled"> <strong>CAMBIO EN DÓLARES</strong> </label>
+</div>
+
+<div class="form-floating mb-3">
+    <input class="form-control" id="floatingInputDisabled" disabled @bind="reuro">
+    <label for="floatingInputDisabled"> <strong>CAMBIO EN EUROS</strong> </label>
+</div>
+
+<div class="form-floating mb-3">
+    <input class="form-control" id="floatingInputDisabled" disabled @bind="rlibra">
+    <label for="floatingInputDisabled"> <strong>CAMBIO EN lIBRAS</strong> </label>
+</div>
+
+@code {
+    private int pesos { get; set; }
+
+    private double rdolar = 0;
+    private double reuro = 0;
+    private double rlibra = 0;
+
+    private void conversor()
+    {
+        rdolar = pesos / 18.78;
+        reuro = pesos / 19.94;
+        rlibra = pesos / 22.75;
+
+    }
+
+}

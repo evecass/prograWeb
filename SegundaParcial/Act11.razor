@@ -1,0 +1,77 @@
+﻿@page "/Listadenumeros"
+
+<h1>LISTA DE NÚMEROS</h1>
+
+<div class="alert alert-primary" role="alert">
+    Número 1 <input type="number" @bind-value="N1" class="form-control">
+    Número 2 <input type="number" @bind-value="N2" class="form-control">
+</div>
+
+<button class="btn btn-outline-primary" @onclick="Calcular">Calcular</button>
+<br />
+<br />
+@if (Resultados)
+{
+    <div class="row">
+
+        <div class="col-md-6 text-center">
+            <h5 class="text-center p-3 mb-2 bg-black text-white"> P A R E S </h5>
+            <ul class="list-group">
+                @foreach (var num in pares)
+                {
+                    <li class="list-group-item list-group-item-secondary alert alert-info h4">@num</li>
+                }
+            </ul>
+        </div>
+
+
+        <div class="col-md-6 text-center">
+            <h4 class="text-center p-3 mb-2 bg-black text-white">I M P A R E S</h4>
+            <ul class="list-group">
+                @foreach (var num in impares)
+                {
+                    <li class="list-group-item list-group-item-secondary alert alert-info h4">@num</li>
+                }
+            </ul>
+        </div>
+
+    </div>
+}
+
+@code {
+    public int N1 { get; set; }
+    public int N2 { get; set; }
+    public List<int> pares { get; set; }
+    public List<int> impares { get; set; }
+    public bool Resultados { get; set; }
+
+    private void Calcular()
+    {
+        pares = new List<int>();
+        impares = new List<int>();
+
+        if (N1 <= N2)
+        {
+            for (int i = N1; i <= N2; i++)
+            {
+                if (i % 2 == 0)
+                { pares.Add(i); }
+                else
+                { impares.Add(i); }
+            }
+        }
+        else
+        {
+            for (int i = N2; i <= N1; i++)
+            {
+                if (i % 2 == 0)
+                { pares.Add(i); }
+                else
+                { impares.Add(i); }
+            }
+        }
+
+        Resultados = true;
+    }
+
+}

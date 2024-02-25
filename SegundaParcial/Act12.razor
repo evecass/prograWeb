@@ -1,0 +1,42 @@
+﻿@page "/act12"
+
+<h1>NÚMEROS PRIMOS</h1>
+
+<div class="alert alert-primary" role="alert">
+    Introduce un número <input type="number" class="form-control" @bind-value="num">
+</div>
+<br />
+<button class="btn btn-outline-primary" @onclick="numsprimo">Calcular</button>
+<br />
+<br />
+
+
+
+<div>
+ <b>Los número primos dentro de ese intervalo son:</b>
+ <br />
+@((MarkupString)resultado)
+</div>
+
+@code {
+    int num = 0;
+    string resultado = "";
+    int i = 0;
+    int j = 0;
+
+    private void numsprimo()
+    {
+        for (int i = 2; i <= num; i++)
+        {
+            int p = 0;
+            for (int j = 1; j <= 100; j++)
+            {
+                if (i % j == 0)
+                    p++;
+            }
+            if (p == 2)
+                resultado += i + "<br>";
+        }
+    }
+
+}

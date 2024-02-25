@@ -1,0 +1,87 @@
+﻿@page "/act14"
+
+
+<h1>Estudiantes</h1>
+
+<EditForm Model="lapersona" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3 row">
+        <label form="txtNombre" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="alert alert-primary">
+            <InputText class="form-control" id="txtNombre" @bind-Value="lapersona.Nombre" />
+            <ValidationMessage For="@(()=>lapersona.Nombre)" />
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label form="txtCorreo" class="col-sm-2 col-form-label">Correo</label>
+        <div class="alert alert-primary">
+            <InputText class="form-control" id="txtCorreo" @bind-Value="lapersona.Correo" />
+            <ValidationMessage For="@(()=>lapersona.Correo)" />
+
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label form="txtCalificacion" class="col-sm-2 col-form-label">Calificacion</label>
+        <div class="alert alert-primary">
+            <InputText class="form-control" id="txtCalificacion" @bind-Value="lapersona.Calificacion" />
+            <ValidationMessage For="@(()=>lapersona.Calificacion)" />
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <button type="submit" class="btn btn-primary my-3">Guardar</button>
+    </div>
+
+
+</EditForm>
+
+
+
+@if (alumnos.Count > 0)
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Calificación</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Persona persona in alumnos)
+            {
+                <tr>
+                    <td>@persona.Nombre</td>
+                    <td>@persona.Correo</td>
+                    <td>@persona.Calificacion</td>
+                    <td><button class="btn" @onclick="(() => Eliminar(persona))"><span class="oi oi-trash"></span></button></td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    private Persona lapersona = new();
+    private List<Persona> alumnos = new();
+
+    private void Guardar()
+    {
+        alumnos.Add(lapersona);
+        lapersona = new();
+    }
+
+    private void Eliminar(Persona persona)
+    {
+        alumnos.Remove(persona);
+    }
+}

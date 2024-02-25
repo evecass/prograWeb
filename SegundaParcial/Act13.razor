@@ -1,0 +1,117 @@
+﻿@page "/act13"
+
+<h1>LISTA DE TÍTULOS DE CANCIONES</h1>
+
+<div class="alert alert-primary" role="alert">
+    Nombre de la canción <input type="text" class="form-control" @bind-value="nombre">
+</div>
+
+<button class="btn btn-outline-primary" @onclick="agregar"> Agregar actividad </button>
+<button class="btn btn-outline-danger" @onclick="limpiar"> Limpiar </button>
+<button class="btn btn-outline-primary" @onclick="filtro"> Filtro </button>
+<button class="btn btn-outline-success" @onclick="ascendente"> Ascendente </button>
+<button class="btn btn-outline-success" @onclick="descendente"> Descendente</button>
+
+<br />
+<br />
+
+@if (posicionModificar >= 0)
+{
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary my-3" @onclick="guardar">Guardar</button>
+        <button type="button" class="btn btn-danger my-3" @onclick="cancelar">Cancelar</button>
+
+    </div>
+}
+
+<h5>Ingresados @canciones.Count</h5>
+
+@if (canciones.Count > 0)
+{
+    <ul>
+        @for (int i = 0; i < canciones.Count; i++)
+        {
+            var indice = i;
+            <li class="list-group-item">
+                @canciones[i]
+                @if (aux > 0)
+                {
+                    <button class="btn btn-outline-danger" @onclick="()=>Eliminar(indice)"> Eliminar </button>
+                    <button class="btn btn-outline-primary" @onclick="()=>Modificar(indice)"> Modificar </button>
+                }
+            </li>
+        }
+    </ul>
+}
+
+
+
+@code {
+private string nombre = "";
+    //private List<string> Nombres = new List<string>();
+    private List<string> canciones = new();
+    private int posicionModificar = -1;
+    private int aux = 1;
+
+    private void agregar()
+    {
+        if (!canciones.Contains(nombre)) //no agregar uno ya puesto
+        {
+            canciones.Add(nombre);
+        }
+    }
+
+    private void limpiar()
+    {
+        canciones.Clear();
+    }
+
+    private void filtro()
+    {
+
+        aux = -1;
+        List<string> filtro = canciones.Where(x => x.StartsWith(nombre)).ToList();
+        if (filtro.Count >= 0)
+        {
+
+            canciones = filtro;
+        }
+    }
+
+    private void ascendente()
+    {
+        var Ascendente = canciones.OrderBy(a => a).ToList();
+        canciones = Ascendente;
+    }
+
+    private void descendente()
+    {
+        var Descendente = canciones.OrderByDescending(a => a).ToList();
+        canciones = Descendente;
+    }
+
+
+
+    private void Modificar(int posicion)
+    {
+        nombre = canciones[posicion];
+        posicionModificar = posicion;
+    }
+
+    private void Eliminar(int posicion)
+    {
+        canciones.RemoveAt(posicion);
+    }
+
+    private void cancelar()
+    {
+        nombre = "";
+        posicionModificar = -1;
+    }
+    private void guardar()
+    {
+        canciones[posicionModificar] = nombre;
+        nombre = "";
+        cancelar();
+    }
+}
