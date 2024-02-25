@@ -1,0 +1,36 @@
+
+p{
+  color:rgb(97, 0, 233); /*color de letra */
+    font:oblique bold 120% cursive; /* tipo de letra */
+    border:10px; /* tamaño del borde */
+    border-color:rgb(255, 0, 30); /* color del borde */
+    border-style:groove;/* tipo de borde */
+    width: 250px; /*ancho del cuadro */
+    height:50px;/*alto del cuadro */
+    
+    background: rgb(212, 87, 170);
+}
+
+h1{
+  font-size:20px;/* Tamaño de letra */
+  font:oblique bold 120% cursive;/*tipo de letra */
+  font-weight:bold;
+  letter-spacing:5px;/* espacio entre letras */
+  text-transform:capitalize;}
+
+
+input{
+  color:rgb(0, 12, 235);
+  font:oblique bold 120% cursive;/*tipo de letra */
+  background: rgb(67, 226, 176);
+}
+
+label{
+  font-family: monospace;
+  letter-spacing:10px;/* espacio entre letras */
+}
+
+b{
+  font-family: monospace;
+  letter-spacing:10px;/* espacio entre letras */
+}

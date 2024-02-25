@@ -1,0 +1,57 @@
+  /* CSS DE LA ACTIVIDAD 5 - CASTREJÓN EVELYN */
+  
+  p {color:rgb(94, 0, 235);}/*color de letra */
+  
+  .p1 {text-align: center;}/* ubicación del texto*/
+  
+  .p2{border:5px dotted red;}
+  
+  .p3{font-size: 100px;} /* Tamaño de letra */
+  
+  h1 {border: 4px solid black;}
+  
+  h2 {
+    color:rgb(97, 0, 233); /*color de letra */
+    font:oblique bold 120% cursive; /* tipo de letra */
+    border:40px; /* tamaño del borde */
+    border-color:rgb(255, 0, 30); /* color del borde */
+    border-style:double;/* tipo de borde */
+    width: 150px; /*ancho del cuadro */
+    height:50px;/*alto del cuadro */
+    
+    background: rgb(212, 87, 170); }/* color de fondo */
+
+  h3 { color:rgb(255, 0, 191);  /*color de letra */
+    font-size:70px;
+    font-family:fantasy;/*tipo de letra */
+    font-weight:bold;
+    font-style:italic;
+    line-height:100px;/* espacio */
+    letter-spacing:20px;/* espacio entre letras */
+    text-decoration:underline red;/* subrayar el texto */
+    text-transform:capitalize;
+    text-align:left;/* ubicación del texto */
+    text-indent:30px;}
+
+
+  h4 {font-size:20px;/* Tamaño de letra */
+    font-family:monospace;/*tipo de letra */
+    font-weight:bold;
+    font-style:italic;
+    line-height:100px;/* espacio */
+    letter-spacing:100px;/* espacio entre letras */
+    text-decoration:overline;/* subrayar el texto */
+    text-transform:capitalize;
+    text-align:right;/* ubicación del texto */
+    
+    border-width:10px;/* tamaño del borde */
+    border-color:rgb(52, 21, 230);/* color del borde */
+    border-style:inset;}/* tipo de borde */
+
+  h5, h6 {/* se pueden modificar varios parrafos juntos */
+    font-size: 10px;/* Tamaño de letra */
+    line-height: 5;/* espacio */
+    letter-spacing: 150px;/* espacio entre letras */
+  }
+
+ 
