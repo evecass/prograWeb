@@ -1,0 +1,172 @@
+@page "/examen"
+
+
+<h1></h1>
+
+<EditForm Model="lapersona" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3 row">
+        <label form="txtNombre" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="alert alert-primary">
+            <InputText class="form-control" id="txtNombre" @bind-Value="lapersona.Nombre" />
+            <ValidationMessage For="@(()=>lapersona.Nombre)" />
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <label form="txtCorreo" class="col-sm-2 col-form-label">Correo</label>
+        <div class="alert alert-primary">
+            <InputText class="form-control" id="txtCorreo" @bind-Value="lapersona.Correo" />
+            <ValidationMessage For="@(()=>lapersona.Correo)" />
+
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <label form="txtCalificacion" class="col-sm-2 col-form-label">Calificación</label>
+        <div class="alert alert-primary">
+            <InputText class="form-control" id="txtCalificacion" @bind-Value="lapersona.Calificacion" />
+            <ValidationMessage For="@(()=>lapersona.Calificacion)" />
+        </div>
+    </div>
+
+
+    <div class=" mb-3 row"></div>
+    <label for="txtGenero" class="col-sm-2 col-form-label">Género</label>
+    <div class="col-sm-10">
+        <InputRadioGroup @bind-Value="lapersona.Genero">
+            <label><InputRadio Value="2" />Mujer</label>
+            <label><InputRadio Value="1" />Hombre</label>
+        </InputRadioGroup>
+        <ValidationMessage For="@(() => lapersona.Genero)" />
+    </div>
+
+    <br />
+
+    <div class="mb-3">
+            <button class="btn btn-success" type="submit">Enviar</button>
+            @if (personaSeleccionada != null)
+            {
+                <button class="btn btn-primary" @onclick="Actualizar">Actualizar</button>
+            }
+    </div>
+
+</EditForm>
+
+
+
+@if (alumnos.Count > 0)
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th scope="col">N O M B R E</th>
+                <th scope="col">C O R R E O</th>
+                <th scope="col">C A L I F I C A C I Ó N</th>
+                <th scope="col">G É N E R O</th>
+                <th scope="col">E D I T A R</th>
+                <th scope="col">B O R R A R</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Clase persona in alumnos)
+            {
+                <tr>
+                    <td>@persona.Nombre</td>
+                    <td>@persona.Correo</td>
+                    <td>@persona.Calificacion</td>
+                    <td>@((persona.Genero == 1) ? "Hombre":"Mujer")</td>
+                    <td><button class="btn btn-warning" @onclick="(() => Editar(persona))">Editar</button></td>
+                    <td><button class="btn" @onclick="(() => Eliminar(persona))"><span class="oi oi-trash"></span></button></td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    private Clase lapersona = new();
+    private List<Clase> alumnos = new();
+    private Clase personaSeleccionada = null;
+
+    private void Guardar()
+    {
+        alumnos.Add(lapersona);
+        lapersona = new();
+    }
+
+    
+    private void Eliminar(Clase persona)
+    {
+        alumnos.Remove(persona);
+    }
+
+
+
+    private void Editar(Clase persona)
+    {
+        personaSeleccionada = persona;
+        lapersona = new Clase
+            {
+                Nombre = personaSeleccionada.Nombre,
+                Correo = personaSeleccionada.Correo,
+                Calificacion = personaSeleccionada.Calificacion,
+                Genero = personaSeleccionada.Genero
+            };
+    }
+
+
+
+    private void Actualizar()
+    {
+        int index = alumnos.IndexOf(personaSeleccionada);
+        alumnos[index] = lapersona;
+        lapersona = new Clase();
+        personaSeleccionada = null;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row mb-3">
+        <div class="alert alert-primary">
+            <select class="form-select" id="txtDepartamento" name="departamento" @bind="elProducto.Departamento" required>
+                <option value="">DEPARTAMENTO</option>
+                <option value="frutas">Frutas</option>
+                <option value="verduras">Verduras</option>
+                <option value="lacteos">Lácteos</option>
+            </select>
+            <ValidationMessage For="@(()=>elProducto.Departamento)" />
+        </div>
+    </div>
+
+
+
+
+    <div class="row mb-3">
+        <label for="txtNombre" class="col-2 col-form-label">DEPARTAMENTO</label>
+        <select class="form-select" id="txtDepartamento" name="departamento" @bind="elProducto.Departamento" required aria-label="select example">
+            <option value="">Escoge un departamento</option>
+            <option value="frutas">Frutas</option>
+            <option value="verduras">Verduras</option>
+            <option value="lacteos">Lácteos</option>
+        </select>
+        <ValidationMessage For="@(()=>elProducto.Departamento)" />
+    </div>

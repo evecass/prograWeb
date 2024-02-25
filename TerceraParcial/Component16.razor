@@ -1,0 +1,42 @@
+﻿@page "/act16"
+
+@inject HttpClient httpClient
+
+<h3>BASE DE DATOS</h3>
+
+@if (personas == null)
+{
+    <p>Cargando datos...</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Autor</th>
+                <th>Titulo</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var persona in personas)
+            {
+                <tr>
+                    <td>@persona.Autor</td>
+                    <td>@persona.Titulo</td>
+                    <td>@persona.Fecha</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Persona> personas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        personas = await httpClient.GetFromJsonAsync<List<Persona>>("api/personas");
+    }
+}
